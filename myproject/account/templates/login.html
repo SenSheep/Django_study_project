@@ -1,0 +1,25 @@
+<!-- templates/login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h2>Вход</h2>
+
+    {% for msg in messages %}
+        <div>{{ msg }}</div>
+    {% endfor %}
+
+    <form method="POST">
+        {% csrf_token %}
+        <label for="username">Имя пользователя:</label>
+        <input type="text" name="username" required>
+        <label for="password">Пароль:</label>
+        <input type="password" name="password" required>
+        <button type="submit">Войти</button>
+    </form>
+</body>
+</html>
