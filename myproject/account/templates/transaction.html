@@ -1,32 +1,115 @@
-<h1>Ваши транзакции</h1>
-<p>Ваш уникальный ID: {{ user_id }}</p>
 
-<table>
-    <thead>
-        <tr>
-            <th>Дата</th>
-            <th>Категория</th>
-            <th>Сумма</th>
-            <th>Описание</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for transaction in transactions %}
-            <tr>
-                <td>{{ transaction.date }}</td>
-                <td>{{ transaction.category }}</td>
-                <td>{{ transaction.amount }}</td>
-                <td>{{ transaction.description }}</td>
-            </tr>
-        {% empty %}
-            <tr>
-                <td colspan="4">У вас нет транзакций</td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
 
-<p>Hello, {{ user.username }}!</p>
-<p>Ваш уникальный ID: {{ user_id }}</p>
-<a href="{% url 'logout' %}">Logount</a>
-<a href="{% url 'home' %}">Home</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ваши Транзакции</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .user-info {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .no-transactions {
+            text-align: center;
+            font-style: italic;
+            color: #999;
+        }
+        .nav-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .nav-links a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Your Transactions</h1>
+
+        <div class="user-info">
+            <p>Hello, {{ user.username }}!</p>
+            <p>Your ID: {{ user_id }}</p>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Number</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                    <tr>
+                        <td>{{ transaction.date }}</td>
+                        <td>{{ transaction.category }}</td>
+                        <td>{{ transaction.amount }}</td>
+                        <td>{{ transaction.description }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4" class="no-transactions">You have not any transactions</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="nav-links">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+    </div>
+</body>
+</html>
